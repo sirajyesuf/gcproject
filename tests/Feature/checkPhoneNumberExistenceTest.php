@@ -30,6 +30,7 @@ class checkPhoneNumberExistenceTest extends TestCase
     {
         $phone_number = '+1-858-732-1025';
         $response = $this->postJson('/user/check_phone_number_existence',['phone_number'=>$phone_number]);
+        $response->dump();
         $response->assertStatus(200)
                  ->assertExactJson(['is_exist'=>true]);
     }

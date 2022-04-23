@@ -41,8 +41,9 @@ class RegistrationTest extends TestCase
      */
     public function test_registration()
     {   
-        $fields = ['name'=>'Tesfaye Gobena','phone_number'=>'251927366785'];
+        $fields = ['name'=>'Tesfaye Gobena','phone_number'=>'251923065851'];
         $response = $this->withHeader('Accept','application/json')->postJson('/user/register',$fields);
+        $response->dump();
         $response->assertStatus(200)->assertExactJson([
             'sent'=>'message sent',
             'status'=>'success',
@@ -56,7 +57,7 @@ class RegistrationTest extends TestCase
      */
     public function test_code_verification()
     {   
-        $fields = ['device_name'=>'Tesfaye Gobena','phone_number'=>'251927366785','code'=>488957];
+        $fields = ['device_name'=>'Tesfaye Gobena','phone_number'=>'251940204832','code'=>473429];
         $response = $this->withHeader('Accept','application/json')->postJson('/user/verify_code',$fields);
         $response->dump();
         $response->assertStatus(200);
@@ -86,7 +87,7 @@ class RegistrationTest extends TestCase
      */
     public function test_login()
     {   
-        $fields = ['phone_number'=>'251927366785','code'=>107430,'device_name'=>'tekno'];
+        $fields = ['phone_number'=>'251940204832','code'=>473429,'device_name'=>'tekno'];
         // $user = User::where('phone_number','251927366785')->first();
         // $token = $user->createToken('tekno')
         $response = $this->withHeader('Accept','application/json')->post('/user/login',$fields);
