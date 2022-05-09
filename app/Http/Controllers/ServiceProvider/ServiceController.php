@@ -28,4 +28,14 @@ class ServiceController extends Controller
             ],Response::HTTP_CREATED);
         }
     }
+
+    public function allServices()
+    {
+       $service_provider = Auth::guard('service_provider')->user();
+       $services =  $service_provider->services;
+       return response()->json([
+           'services'=>$services,
+
+       ],200);
+    }
 }
