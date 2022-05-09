@@ -212,7 +212,7 @@ class AuthenticationTest extends TestCase
     public function test_registration_three()
     {
         $fields = [
-            'phone_number'=>'251994920163',
+            'phone_number'=>'251968983297',
             'owner_name'=>'hasen',
             'business_name' => 'hasen spa',
             'latitude' =>9.033140,
@@ -284,8 +284,8 @@ class AuthenticationTest extends TestCase
     public function test_login_three()
     {
         $fields = [
-            'phone_number'=>'251994920163',
-            'code'=>157545,
+            'phone_number'=>'251968983297',
+            'code'=>384032,
             'device_name'=>'tecno'
         ];
         $response = $this->withHeader('Accept','application/json')->postJson('/service_provider/login',$fields);

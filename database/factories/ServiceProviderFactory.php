@@ -28,6 +28,7 @@ class ServiceProviderFactory extends Factory
             'latitude' => $this->faker->latitude,
             'longitude' => $this->faker->longitude,
             'logo' => $this->faker->word,
+            'type'=>$this->faker->numberBetween(1,2),
         ];
     }
 }

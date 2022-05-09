@@ -35,6 +35,7 @@ class RegistrationRequest extends FormRequest
             'longitude'=>['required','regex:/^[-]?((((1[0-7][0-9])|([0-9]?[0-9]))\.(\d+))|180(\.0+)?)$/'],
             'logo'=>['required','image','max:3100'],
             'type'=>['required','integer',Rule::in([1,2]),]
+            //1 is for salon and 2 is for spa
         ];
     }
 

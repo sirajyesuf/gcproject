@@ -15,9 +15,9 @@ return new class extends Migration
     {
         Schema::table('sms_code', function (Blueprint $table) {
             $table->unsignedBigInteger('user_id')->nullable()->change();
-            $table->unsignedBigInteger('service_provider_id')->nullable();
+            $table->unsignedBigInteger('service_provider_id')->nullable()->change();
             
-            $table->foreign('service_provider_id')->on('service_providers')->references('id');
+            // $table->foreign('service_provider_id')->on('service_providers')->references('id');
             // $table->foreign('user_id')->on('users')->references('id');
 
 
