@@ -14,4 +14,5 @@ Route::controller(AuthenticationController::class)->group(function(){
 Route::controller(ServiceController::class)->middleware('auth:service_provider')->group(function(){
    Route::post('/add_service','addService');
    Route::get('/all_services','allServices');
+   Route::post('/edit_service/{id}','editService');
 });

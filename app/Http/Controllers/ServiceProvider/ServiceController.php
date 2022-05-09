@@ -4,7 +4,9 @@ namespace App\Http\Controllers\ServiceProvider;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ServiceProvider\AddServiceRequest;
+use App\Http\Requests\ServiceProvider\EditServiceProviderRequest;
 use App\Models\Service;
+use App\Models\ServiceProvider;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
@@ -37,5 +39,23 @@ class ServiceController extends Controller
            'services'=>$services,
 
        ],200);
+    }
+
+    public function editService(EditServiceProviderRequest $editServiceProviderRequest,$id)
+    {
+        $service = Service::findOrFail($id);
+        $extension = $editServiceProviderRequest->file('image')->getClientOriginalExtension();
+        $name = $editServiceProviderRequest->file('image')->getClientOriginalName();
+        $file_name = time().$name;
+        $editServiceProviderRequest->file('image')->move(public_path('service_images'),$file_name);
+        $fields = $editServiceProviderRequest->all();
+        $fields['image'] = 'service_images/'.$file_name;
+    //   $service_provider = Auth::guard('service_provider')->user();
+        $service->update($fields);
+        $service->refresh();
+        return response()->json([
+            'service'=>$service,
+
+        ],200);    
     }
 }
