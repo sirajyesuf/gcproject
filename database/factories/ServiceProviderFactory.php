@@ -22,11 +22,11 @@ class ServiceProviderFactory extends Factory
     public function definition(): array
     {
         return [
-            'business_name' => $this->faker->word,
+            'business_name' => 'Addis Ababa University',
             'phone_number' => $this->faker->phoneNumber,
             'owner_name' => $this->faker->word,
-            'latitude' => $this->faker->latitude,
-            'longitude' => $this->faker->longitude,
+            'latitude' =>    9.040017609464645,
+            'longitude' =>   38.75933142918076,
             'logo' => $this->faker->word,
             'type'=>$this->faker->numberBetween(1,2),
         ];

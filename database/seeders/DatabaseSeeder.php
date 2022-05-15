@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
         // User::factory(10)->create();
-        // ServiceProvider::factory(10)->create();
-        Service::factory(20)->create();
+        ServiceProvider::factory(10)->create();
+        // Service::factory(20)->create();
     }
 }
