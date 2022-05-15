@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Deposit;
 use App\Models\Service;
 use App\Models\ServiceProvider;
 use App\Models\User;
@@ -21,5 +22,6 @@ class DatabaseSeeder extends Seeder
         // User::factory(10)->create();
         // ServiceProvider::factory(10)->create();
         // Service::factory(20)->create();
+        Deposit::factory(10)->create();
     }
 }

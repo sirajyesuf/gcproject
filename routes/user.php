@@ -2,6 +2,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\User\AuthenticationController;
+use App\Http\Controllers\User\PaymentController;
 use App\Http\Controllers\User\ServiceController;
 use App\Http\Controllers\User\ServiceProviderController;
 
@@ -18,4 +19,7 @@ Route::controller(ServiceProviderController::class)->middleware('auth:user')->gr
 
 Route::controller(ServiceController::class)->middleware('auth:user')->group(function(){
   Route::get('/services/{service_provider_id}','listOfServices');
+});
+Route::controller(PaymentController::class)->middleware('auth:user')->group(function(){
+ Route::post('/deposit','deposit');
 });

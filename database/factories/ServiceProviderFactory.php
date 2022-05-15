@@ -22,13 +22,13 @@ class ServiceProviderFactory extends Factory
     public function definition(): array
     {
         return [
-            'business_name' => 'Addis Ababa University',
+            'business_name' => $this->faker->word,
             'phone_number' => $this->faker->phoneNumber,
             'owner_name' => $this->faker->word,
-            'latitude' =>    9.040017609464645,
-            'longitude' =>   38.75933142918076,
+            'latitude' => $this->faker->latitude,
+            'longitude' => $this->faker->longitude,
             'logo' => $this->faker->word,
-            'type'=>$this->faker->numberBetween(1,2),
+            'type' => $this->faker->randomNumber(),
         ];
     }
 }
