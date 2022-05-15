@@ -11,5 +11,5 @@ Route::post('/resend_code',[AuthenticationController::class,'resend']);
 Route::post('/login',[AuthenticationController::class,'login']);
 
 Route::controller(ServiceProviderController::class)->middleware('auth:user')->group(function(){
-  Route::get('/services/{latitude}/{longitude}','listOfServices');
+  Route::get('/service_providers/{latitude}/{longitude}','listOfServices');
 });

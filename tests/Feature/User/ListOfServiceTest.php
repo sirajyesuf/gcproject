@@ -21,7 +21,7 @@ class ListOfServiceTest extends TestCase
         $longitude =  39.29194623894618;
         $user = User::find(1);
         $token = $user->createToken('test device')->plainTextToken;
-        $response = $this->withHeaders(['Accept'=>'application/json','Authorization'=>'Bearer '.$token])->get('/user/services/'.$latitude.'/'.$longitude);
+        $response = $this->withHeaders(['Accept'=>'application/json','Authorization'=>'Bearer '.$token])->get('/user/service_providers/'.$latitude.'/'.$longitude);
         $response->dump();
         
         
@@ -34,8 +34,8 @@ class ListOfServiceTest extends TestCase
         $longitude =  39.29194623894618;
         $user = User::find(1);
         $token = $user->createToken('test device')->plainTextToken;
-        $response = $this->withHeaders(['Accept'=>'application/json','Authorization'=>'Bearer '.$token])->get('/user/services/'.$latitude.'/'.$longitude);
-        $response1 = $this->withHeaders(['Accept'=>'application/json','Authorization'=>'Bearer '.$token])->get('http://gcproject.test/user/services/8.5636642583933/39.291946238946?page=2');
+        $response = $this->withHeaders(['Accept'=>'application/json','Authorization'=>'Bearer '.$token])->get('/user/service_providers/'.$latitude.'/'.$longitude);
+        $response1 = $this->withHeaders(['Accept'=>'application/json','Authorization'=>'Bearer '.$token])->get('http://gcproject.test/user/service_providers/8.5636642583933/39.291946238946?page=2');
 
         $response->dump();
         $response1->dump();
@@ -53,8 +53,8 @@ class ListOfServiceTest extends TestCase
         $longitude =  39.29194623894618;
         $user = User::find(1);
         $token = $user->createToken('test device')->plainTextToken;
-        $response = $this->withHeaders(['Accept'=>'application/json'])->get('/user/services/'.$latitude.'/'.$longitude);
-        $response1 = $this->withHeaders(['Accept'=>'application/json'])->get('http://gcproject.test/user/services/8.5636642583933/39.291946238946?page=2');
+        $response = $this->withHeaders(['Accept'=>'application/json'])->get('/user/service_providers/'.$latitude.'/'.$longitude);
+        $response1 = $this->withHeaders(['Accept'=>'application/json'])->get('http://gcproject.test/user/service_providers/8.5636642583933/39.291946238946?page=2');
 
         $response->dump();
         $response1->dump();
@@ -62,7 +62,7 @@ class ListOfServiceTest extends TestCase
 
         // $new_response = json_decode($response);
         
-        $response->assertStatus(Response::HTTP_UNAUTHORIZED);
+        $response1->assertStatus(Response::HTTP_UNAUTHORIZED);
 
     }
 
