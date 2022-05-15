@@ -8,7 +8,8 @@ use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Http\Response;
 use Tests\TestCase;
 
-class ListOfServiceTest extends TestCase
+
+class ListOfServiceProviderTest extends TestCase
 {
     /**
      * A basic feature test example.
@@ -35,15 +36,15 @@ class ListOfServiceTest extends TestCase
         $user = User::find(1);
         $token = $user->createToken('test device')->plainTextToken;
         $response = $this->withHeaders(['Accept'=>'application/json','Authorization'=>'Bearer '.$token])->get('/user/service_providers/'.$latitude.'/'.$longitude);
-        $response1 = $this->withHeaders(['Accept'=>'application/json','Authorization'=>'Bearer '.$token])->get('http://gcproject.test/user/service_providers/8.5636642583933/39.291946238946?page=2');
+        // $response1 = $this->withHeaders(['Accept'=>'application/json','Authorization'=>'Bearer '.$token])->get('http://gcproject.test/user/service_providers/8.5636642583933/39.291946238946?page=2');
 
         $response->dump();
-        $response1->dump();
+        // $response1->dump();
         $response->assertStatus(200);
 
         // $new_response = json_decode($response);
         
-        $response1->assertStatus(200);
+        // $response1->assertStatus(200);
     }
 
 

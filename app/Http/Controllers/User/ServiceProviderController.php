@@ -10,7 +10,7 @@ use App\Http\Resources\ServiceProviderResource;
 
 class ServiceProviderController extends Controller
 {
-     public function listOfServices($latitude,$longitude)
+     public function listOfServiceProviders($latitude,$longitude)
      {
         $latitude = $latitude;
         $longitude = $longitude;
@@ -23,4 +23,6 @@ class ServiceProviderController extends Controller
              ->paginate(10);
         return ServiceProviderResource::collection($serviceProviders);     
      }
+
+     
 }

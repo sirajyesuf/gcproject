@@ -27,7 +27,7 @@ class ServiceFactory extends Factory
             'price' => $this->faker->randomFloat(),
             'type' => $this->faker->numberBetween(1,2),
             'image' => $this->faker->word,
-            'service_provider_id' => \App\Models\ServiceProvider::factory(),
+            'service_provider_id' => 38,
         ];
     }
 }
