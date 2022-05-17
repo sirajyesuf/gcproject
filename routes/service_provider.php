@@ -15,4 +15,5 @@ Route::controller(ServiceController::class)->middleware('auth:service_provider')
    Route::post('/add_service','addService');
    Route::get('/all_services','allServices');
    Route::post('/edit_service/{id}','editService');
+   Route::get('/delete_service/{id}','deleteService');
 });
