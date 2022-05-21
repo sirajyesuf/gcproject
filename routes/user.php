@@ -2,6 +2,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\User\AuthenticationController;
+use App\Http\Controllers\User\BookingController;
 use App\Http\Controllers\User\PaymentController;
 use App\Http\Controllers\User\ServiceController;
 use App\Http\Controllers\User\ServiceProviderController;
@@ -23,3 +24,8 @@ Route::controller(ServiceController::class)->middleware('auth:user')->group(func
 Route::controller(PaymentController::class)->middleware('auth:user')->group(function(){
  Route::post('/deposit','deposit');
 });
+
+Route::controller(BookingController::class)->middleware('auth:user')->group(function(){
+  Route::post('/book','booking');
+  Route::get('check_booking_eligibility/{service_id}','checkBookingEligibility');
+ });

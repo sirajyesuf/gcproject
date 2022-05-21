@@ -22,6 +22,8 @@ class DatabaseSeeder extends Seeder
         // User::factory(10)->create();
         // ServiceProvider::factory(10)->create();
         // Service::factory(20)->create();
-        Deposit::factory(10)->create();
+        // Deposit::factory(10)->create();
+        //  $this->call(DepositSeeder::class);
+        $this->call(BookingSeeder::class);
     }
 }

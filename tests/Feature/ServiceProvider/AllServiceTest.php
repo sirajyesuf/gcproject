@@ -52,7 +52,6 @@ class AllServiceTest extends TestCase
         ->get('/service_provider/delete_service/1');
         $response->dump();
         $response->assertStatus(200);
-
     }
 
     
