@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\User\AuthenticationController;
 use App\Http\Controllers\User\BookingController;
 use App\Http\Controllers\User\PaymentController;
+use App\Http\Controllers\User\ProfileController;
 use App\Http\Controllers\User\RateAnReviewController;
 use App\Http\Controllers\User\ServiceController;
 use App\Http\Controllers\User\ServiceProviderController;
@@ -38,3 +39,8 @@ Route::controller(BookingController::class)->middleware('auth:user')->group(func
    Route::post('/edit_review/{id}','edit');
    Route::get('service_provider_reviews/{service_provider_id}','serviceProviderReviews');
  });
+
+ Route::controller(ProfileController::class)->middleware('auth:user')->group(function(){
+  Route::get('/find_user/{user_id}','user');
+  
+});

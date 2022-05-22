@@ -41,8 +41,8 @@ class RateAnReviewController extends Controller
 
     public function serviceProviderReviews($service_provider_id)
     {
-      $reviews = RateAndReview::where('service_provider_id',$service_provider_id)->paginate(10);
-      $resourses = (new RateAndReviewResource($reviews));
+      $reviews = RateAndReview::with('user')->where('service_provider_id',$service_provider_id)->paginate(10);
+      $resourses =  (new RateAndReviewResource($reviews));
       return response()->json($resourses->response()->getData(),Response::HTTP_OK);
     }
 }

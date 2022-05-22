@@ -22,8 +22,6 @@ class RateAndReviewResource extends ResourceCollection
             'data'=>$this->collection,
             'rate'=>$rate
         ];
-        // return parent::toArray($request);
+        return parent::toArray($request);
     }
-
-    
 }

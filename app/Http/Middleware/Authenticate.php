@@ -15,10 +15,13 @@ class Authenticate extends Middleware
      */
     protected function redirectTo($request)
     {
-        if($request->is('service_provider') || $request->is('service_provider')){
+        $url = $request->path();
+        if($request->is('service_provider/*')){
+            return response()->json(['message'=>'unauthenticated'],Response::HTTP_UNAUTHORIZED);
+        }elseif($request->is('user/*')){
             return response()->json(['message'=>'unauthenticated'],Response::HTTP_UNAUTHORIZED);
         }
-        if (! $request->expectsJson()) {
+        if (!$request->expectsJson()) {
             return route('login');
         }
     }
