@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Service;
+use App\Models\User\RateAndReview;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -43,4 +44,14 @@ class GeneralServices
       }
       return true;
    }
+
+   public function calculateAverageRate($service_provider_id)
+   {
+      $total = RateAndReview::where('service_provider_id',$service_provider_id)->sum('rate');
+      $count = RateAndReview::where('service_provider_id',$service_provider_id)->count();
+      if($count==0)      return 0;
+      $average = number_format(($total/$count),2);
+      return $average;
+   }
+
 }

@@ -104,7 +104,6 @@ class BookingTest extends TestCase
         $user = User::find(12);
         $token = $user->createToken('test device')->plainTextToken;
         $response = $this->withHeaders(['Accept'=>'application/json','Authorization'=>'Bearer '.$token])->get('/user/check_booking_eligibility/1');
-
         $response->dump();
         $response->assertJson(['status'=>true]);
         $response->assertStatus(Response::HTTP_OK);

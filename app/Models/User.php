@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\User\RateAndReview;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -50,4 +51,11 @@ class User extends Authenticatable
     {
         return $this->hasMany(Booking::class);
     }
+
+    public function rateAndReviews()
+    {
+        return $this->hasMany(RateAndReview::class);
+    }
+
+    
 }

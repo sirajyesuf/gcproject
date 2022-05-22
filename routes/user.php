@@ -1,9 +1,11 @@
 <?php
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\User\AuthenticationController;
 use App\Http\Controllers\User\BookingController;
 use App\Http\Controllers\User\PaymentController;
+use App\Http\Controllers\User\RateAnReviewController;
 use App\Http\Controllers\User\ServiceController;
 use App\Http\Controllers\User\ServiceProviderController;
 
@@ -28,4 +30,11 @@ Route::controller(PaymentController::class)->middleware('auth:user')->group(func
 Route::controller(BookingController::class)->middleware('auth:user')->group(function(){
   Route::post('/book','booking');
   Route::get('check_booking_eligibility/{service_id}','checkBookingEligibility');
+
+ });
+
+ Route::controller(RateAnReviewController::class)->middleware('auth:user')->group(function(){
+   Route::post('/add_review','add');
+   Route::post('/edit_review/{id}','edit');
+   Route::get('service_provider_reviews/{service_provider_id}','serviceProviderReviews');
  });
