@@ -2,18 +2,27 @@
 
 namespace App\Http\Controllers\ServiceProvider;
 
-use App\Http\Controllers\Controller;
+use Carbon\Carbon;
+use App\Models\Booking;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use App\Services\GeneralServices;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Resources\BookingResourceCollection;
 
 class DashboardController extends Controller
 {
      public function index()
      {
-         //return total earning,total paid,total booking;
-         //list of today bookings;
-         $total_earning = DB::table('bookings')->select('bookings.id','bookings.service_provider_id','services.id','services.price','services.service_provider_id')
-                          ->leftJoin('services','services.service_provider_id','bookings.service_provider_id')
-                          ->sum('services.price');
+        $serviceProvider = Auth::guard('service_provider')->user();
+        $generalData = [
+          'rate'=>(new GeneralServices)->calculateAverageRate($serviceProvider->id),
+          'total_booking'=>(new GeneralServices)->serviceProviderTotalBooking($serviceProvider),
+          'today_total_booking'=>(new GeneralServices)->serviceProviderTodayTotalBooking($serviceProvider),
+          'total_balance'=>(new GeneralServices)->serviceProviderTotalBalance($serviceProvider),
+        ];
+        return response()->json($generalData,Response::HTTP_OK);
 
      }
 }

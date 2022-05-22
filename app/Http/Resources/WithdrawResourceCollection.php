@@ -3,11 +3,11 @@
 namespace App\Http\Resources;
 
 use App\Services\GeneralServices;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
-class RateAndReviewResource extends ResourceCollection
+class WithdrawResourceCollection extends ResourceCollection
 {
-    private $service_provider_id;
     /**
      * Transform the resource collection into an array.
      *
@@ -16,12 +16,11 @@ class RateAndReviewResource extends ResourceCollection
      */
     public function toArray($request)
     {
-        $this->service_provider_id = $request->user()->id;
-        $rate = (new GeneralServices)->calculateAverageRate($this->service_provider_id);
-        return [
-            'data'=>$this->collection,
-            'rate'=>$rate,
-        ];
+        $serviceProvider = Auth::guard('service_provider')->user();
+         return [
+             'data'=>$this->collection,
+             'total_withdraw' => (new GeneralServices)->totalWithdraw($serviceProvider)
+         ];
         // return parent::toArray($request);
     }
 }

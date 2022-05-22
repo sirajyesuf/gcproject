@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\Service;
 use App\Models\User\RateAndReview;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -52,6 +53,49 @@ class GeneralServices
       if($count==0)      return 0;
       $average = number_format(($total/$count),2);
       return $average;
+   }
+
+   public function serviceProviderTotalEarning($serviceProvider)
+   {
+    $sum = 0;
+    $bookings = $serviceProvider->bookings()->where('status',2)->get();    
+    if($bookings){
+        foreach($bookings as $book){
+            $price = Service::where('id',$book->service_id)->first()->price;
+            $sum+=$price;
+        }
+    }
+    
+    return $sum; 
+   }
+
+   public function serviceProviderTotalBalance($serviceProvider)
+   {
+      $earning  = $this->serviceProviderTotalEarning($serviceProvider);
+      $service_fee = $this->serviceProviderTotalFee($serviceProvider);
+      $balance = $earning-$service_fee; 
+      return $balance;
+   }
+
+   public function serviceProviderTotalFee($serviceProvider)
+   {
+        $earning  = $this->serviceProviderTotalEarning($serviceProvider);
+        return ($earning*5)/100;
+   }
+
+   public function serviceProviderTodayTotalBooking($serviceProvider)
+   {
+       return $serviceProvider->bookings()->whereDate('service_date',Carbon::today())->count();
+   }
+
+   public function serviceProviderTotalBooking($serviceProvider)
+   {
+       return $serviceProvider->bookings()->count();
+   }
+
+   public function totalWithdraw($serviceProvider)
+   {
+     return $serviceProvider->withdraws()->where('status',3)->sum('amount');
    }
 
 }
