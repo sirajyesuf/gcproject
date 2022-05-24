@@ -33,7 +33,7 @@ class ServiceProviderPaymentTest extends TestCase
             'account_holder'=>'Jemal Yesuf',
             'payment_method'=>1
         ];
-        $serviceProvider = ServiceProvider::find(133);
+        $serviceProvider = ServiceProvider::find(130);
         $token = $serviceProvider->createToken('test device')->plainTextToken;
         // $token="dksfjskldjfkl";
         $response = $this->withHeaders(['Accept'=>'application/json','Authorization'=>'Bearer '.$token])->postJson('/service_provider/add_payment',$data);

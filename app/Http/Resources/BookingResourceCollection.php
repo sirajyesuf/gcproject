@@ -17,11 +17,14 @@ class BookingResourceCollection extends ResourceCollection
     public function toArray($request)
     {
         $serviceProvider = Auth::guard('service_provider')->user();
+        $total_earning = (new GeneralServices)->serviceProviderTotalEarning($serviceProvider);
+        $total_service_fee = (new GeneralServices)->serviceProviderTotalFee($serviceProvider);
+        $total_balance = (new GeneralServices)->serviceProviderTotalBalance($serviceProvider);
          return [
              'data'=>$this->collection,
-             'total_earning'=>(new GeneralServices)->serviceProviderTotalEarning($serviceProvider),
-             'total_service_fee'=>(new GeneralServices)->serviceProviderTotalFee($serviceProvider),
-             'total_balance'=>(new GeneralServices)->serviceProviderTotalBalance($serviceProvider),
+             'total_earning'=>$this->when($request->is('user/*'),$total_earning),
+             'total_service_fee'=>$this->when($request->is('user/*'),$total_service_fee),
+             'total_balance'=>$this->when($request->is('user/*'),$total_balance),
          ];
     }
 }

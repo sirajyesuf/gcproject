@@ -8,6 +8,7 @@ use Illuminate\Support\Carbon;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Resources\BookingResourceCollection;
+use App\Models\Booking;
 
 class ServiceProviderBookingcontroller extends Controller
 {
@@ -20,46 +21,46 @@ class ServiceProviderBookingcontroller extends Controller
     }
     public function toBeDoneBookings()
     {
-        $toBeDoneBookings = $this->serviceProvider->bookings()->orderBy('service_date','DESC')->orderBy('created_at','DESC')->where('status',1)->paginate(15);
-        $resourse = (new BookingResourceCollection($toBeDoneBookings));
+        $bookings = Booking::with(['user','service'])->ofServiceProviderBooking($this->serviceProvider->id,null,1)->paginate(15);
+        $resourse = (new BookingResourceCollection($bookings));
         return response()->json($resourse->response()->getData(),Response::HTTP_OK);
     }
 
     public function completedBookings()
     {
-        $completed = $this->serviceProvider->bookings()->orderBy('service_date','DESC')->orderBy('created_at','DESC')->where('status',2)->paginate(15);
-        $resourse = (new BookingResourceCollection($completed));
+        $bookings = Booking::with(['user','service'])->ofServiceProviderBooking($this->serviceProvider->id,null,2)->paginate(15);
+        $resourse = (new BookingResourceCollection($bookings));
         return response()->json($resourse->response()->getData(),Response::HTTP_OK);
     }
 
     public function allBookings()
     {
-        $completed = $this->serviceProvider->bookings()->orderBy('service_date','DESC')->orderBy('created_at','DESC')->paginate(15);
-        $resourse = (new BookingResourceCollection($completed));
+        $bookings = Booking::with(['user','service'])->ofServiceProviderBooking($this->serviceProvider->id)->paginate(15);
+        $resourse = (new BookingResourceCollection($bookings));
         return response()->json($resourse->response()->getData(),Response::HTTP_OK);
     }
 
     public function todayToBeDoneBookings()
     {
-        $todayToBeDoneBookings = $this->serviceProvider->bookings()->orderBy('service_date','DESC')
-        ->orderBy('created_at','DESC')->whereDate('service_date',Carbon::today())->where('status',1)->paginate(15);
-        $resourse = (new BookingResourceCollection($todayToBeDoneBookings));
+        $bookings = Booking::with(['user','service'])
+        ->ofServiceProviderBooking($this->serviceProvider->id,true,1)->paginate(15);
+        $resourse = (new BookingResourceCollection($bookings));
         return response()->json($resourse->response()->getData(),Response::HTTP_OK);
     }
 
     public function todayCompletedBookings()
     {
-        $todayCompletedBookings = $this->serviceProvider->bookings()->orderBy('service_date','DESC')
-        ->orderBy('created_at','DESC')->whereDate('service_date',Carbon::today())->where('status',2)->paginate(15);
-        $resourse = (new BookingResourceCollection($todayCompletedBookings));
+        $bookings = Booking::with(['user','service'])
+        ->ofServiceProviderBooking($this->serviceProvider->id,true,2)->paginate(15);
+        $resourse = (new BookingResourceCollection($bookings));
         return response()->json($resourse->response()->getData(),Response::HTTP_OK);
     }
 
     public function todayAllBookings()
     {
-        $todayAllBookings = $this->serviceProvider->bookings()->orderBy('service_date','DESC')
-        ->orderBy('created_at','DESC')->whereDate('service_date',Carbon::today())->paginate(15);
-        $resourse = (new BookingResourceCollection($todayAllBookings));
+        $bookings = Booking::with(['user','service'])
+        ->ofServiceProviderBooking($this->serviceProvider->id,true,2)->paginate(15);
+        $resourse = (new BookingResourceCollection($bookings));
         return response()->json($resourse->response()->getData(),Response::HTTP_OK);
     }
     

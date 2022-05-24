@@ -50,7 +50,7 @@ class GeneralServices
    {
       $total = RateAndReview::where('service_provider_id',$service_provider_id)->sum('rate');
       $count = RateAndReview::where('service_provider_id',$service_provider_id)->count();
-      if($count==0)      return 0;
+      if($count==0)      return number_format(0,2);
       $average = number_format(($total/$count),2);
       return $average;
    }
