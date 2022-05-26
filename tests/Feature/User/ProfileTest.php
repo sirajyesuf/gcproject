@@ -18,7 +18,7 @@ class ProfileTest extends TestCase
     public function test_user()
     {
         $token="sdfjklsdjfklsdjklfj";
-        $response = $this->withHeaders(['Accept'=>'application/json','Authorization'=>'Bearer '.$token])->get('/user/find_user/1');
+        $response = $this->withHeaders(['Accept'=>'application/json','Authorization'=>'Bearer '.$token])->get('/user/profile');
         $response->dump();
         $response->assertStatus(Response::HTTP_UNAUTHORIZED);
     }
@@ -27,7 +27,16 @@ class ProfileTest extends TestCase
     {
         $user = User::find(12);
         $token = $user->createToken('test device')->plainTextToken;
-        $response = $this->withHeaders(['Accept'=>'application/json','Authorization'=>'Bearer '.$token])->get('/user/find_user/1');
+        $response = $this->withHeaders(['Accept'=>'application/json','Authorization'=>'Bearer '.$token])->get('/user/profile');
+        $response->dump();
+        $response->assertStatus(Response::HTTP_OK);
+    }
+
+    public function test_log_out()
+    {
+        $user = User::find(1);
+        $token = $user->createToken('test device')->plainTextToken;
+        $response = $this->withHeaders(['Accept'=>'application/json','Authorization'=>'Bearer '.$token])->get('/user/log_out');
         $response->dump();
         $response->assertStatus(Response::HTTP_OK);
     }

@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use App\Services\GeneralServices;
 
 class ServiceProviderResource extends JsonResource
 {
@@ -25,6 +26,7 @@ class ServiceProviderResource extends JsonResource
             'logo' => $this->logo,
             'rate'=> 1,
             'distance'=>$this->distance,
+            'rate'=> (new GeneralServices)->calculateAverageRate($this->id),
         ];
     }
 }

@@ -9,6 +9,7 @@ use App\Http\Controllers\User\ProfileController;
 use App\Http\Controllers\User\RateAnReviewController;
 use App\Http\Controllers\User\ServiceController;
 use App\Http\Controllers\User\ServiceProviderController;
+use App\Http\Controllers\User\UserProfileController;
 
 Route::post('/check_phone_number_existence',[AuthenticationController::class,'checkPhoneNumberExistence']);
 Route::post('/register',[AuthenticationController::class,'register']);
@@ -40,7 +41,8 @@ Route::controller(BookingController::class)->middleware('auth:user')->group(func
    Route::get('service_provider_reviews/{service_provider_id}','serviceProviderReviews');
  });
 
- Route::controller(ProfileController::class)->middleware('auth:user')->group(function(){
-  Route::get('/find_user/{user_id}','user');
+ Route::controller(UserProfileController::class)->middleware('auth:user')->group(function(){
+  Route::get('/profile','profile');
+  Route::get('log_out','logOut');
   
 });
