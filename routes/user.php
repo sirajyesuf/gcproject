@@ -42,7 +42,7 @@ Route::controller(BookingController::class)->middleware('auth:user')->group(func
  });
 
  Route::controller(UserProfileController::class)->middleware('auth:user')->group(function(){
-  Route::get('/profile','profile');
-  Route::get('log_out','logOut');
-  
-});
+    Route::get('/profile','profile');
+    Route::get('log_out','logOut');
+    Route::post('/edit_profile','editProfile');
+  });
