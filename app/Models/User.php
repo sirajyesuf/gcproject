@@ -61,7 +61,7 @@ class User extends Authenticatable
     public function getProfilePictureAttribute($value)
     {
         if(empty($value)){
-            return null;
+            return url('user_images/profile_picture.png');
         }
         return url($value);
     }
