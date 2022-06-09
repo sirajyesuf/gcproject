@@ -32,6 +32,7 @@ Route::controller(PaymentController::class)->middleware('auth:user')->group(func
 Route::controller(BookingController::class)->middleware('auth:user')->group(function(){
   Route::post('/book/{deposit_id?}','booking');
   Route::get('check_booking_eligibility/{service_id}','checkBookingEligibility');
+  Route::get('/user_bookings','userBookings');
 
  });
 

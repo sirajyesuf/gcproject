@@ -159,5 +159,16 @@ class BookingTest extends TestCase
         $response->assertJson(['status'=>false]);
         $response->assertStatus(Response::HTTP_OK);
     }
+
+    public function test_user_previous_booking()
+    {
+        
+        $user = User::find(15);
+        $token = $user->createToken('test device')->plainTextToken;
+        $response = $this->withHeaders(['Accept'=>'application/json','Authorization'=>'Bearer '.$token])->get('/user/user_bookings');
+        $response->dump();
+        $response->assertStatus(Response::HTTP_OK);
+    }
+    
     
 }

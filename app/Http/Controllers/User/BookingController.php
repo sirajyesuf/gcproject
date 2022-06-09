@@ -2,17 +2,18 @@
 
 namespace App\Http\Controllers\User;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\User\BookingRequest;
+use Carbon\Carbon;
+use App\Models\User;
 use App\Models\Booking;
 use App\Models\Deposit;
 use App\Models\Service;
-use App\Models\User;
-use App\Services\GeneralServices;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use App\Services\GeneralServices;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\User\BookingRequest;
+use App\Http\Resources\BookingResourceCollection;
 
 class BookingController extends Controller
 {
@@ -43,5 +44,13 @@ class BookingController extends Controller
         $user = Auth::guard('user')->user();
         $check = (new GeneralServices)->checkUserBookingEligibilty($user,$service_id);
         return response()->json(['status'=>$check],Response::HTTP_OK);  
+     }
+
+     public function userBookings()
+     {
+        $user = Auth::guard('user')->user();
+        $bookings = Booking::with(['user','service'])->where('user_id',$user->id)->paginate(15);
+        $resourse = (new BookingResourceCollection($bookings));
+        return response()->json($resourse->response()->getData(),Response::HTTP_OK);
      }
 }
