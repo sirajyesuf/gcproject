@@ -20,6 +20,9 @@ class GeneralServices
         
         if($user->bookings){
             foreach($user->bookings as $book){
+                if($book->draft){
+                    continue;
+                }
                 $price = Service::where('id',$book->service_id)->first()->price;
                 $sum+=$price;
             }
@@ -58,7 +61,7 @@ class GeneralServices
    public function serviceProviderTotalEarning($serviceProvider)
    {
     $sum = 0;
-    $bookings = $serviceProvider->bookings()->where('status',2)->get();    
+    $bookings = $serviceProvider->bookings()->where('status',2)->where('draft',false)->get();    
     if($bookings){
         foreach($bookings as $book){
             $price = Service::where('id',$book->service_id)->first()->price;

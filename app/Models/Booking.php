@@ -15,6 +15,7 @@ class Booking extends Model
 
     public function scopeOfServiceProviderBooking($query,$service_provider_id,$today=null,$status=null)
     {
+      $query->where('draft',false); 
       if($today)
       {
          if($status){

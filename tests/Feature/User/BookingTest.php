@@ -78,11 +78,62 @@ class BookingTest extends TestCase
             'service_date'=>'2022-10-22',
             'service_id' => 1
         ];
-        $user = User::find(1);
+        $user = User::find(60);
         $token = $user->createToken('test device')->plainTextToken;
         $response = $this->withHeaders(['Accept'=>'application/json','Authorization'=>'Bearer '.$token])->postJson('/user/book',$data);
         $response->dump();
-        $response->assertStatus(202);
+        $response->assertStatus(Response::HTTP_CREATED);
+
+        $data = $response->decodeResponseJson();
+        $this->assertDatabaseHas('bookings',
+        [
+            'id'=>$data['id'],
+            'status'=>1,
+            'deposit_id'=>null
+        ]
+        );
+    }
+
+    public function test_booking_and_deposit()
+    {
+        $data = [
+            'amount'=>5000,
+            'payment_method' => 1,
+            'transaction_number'=>'dkjlfjasklfjklasjklfj'
+        ];
+        $user = User::find(60);
+        $token = $user->createToken('test device')->plainTextToken;
+        $response = $this->withHeaders(['Accept'=>'application/json','Authorization'=>'Bearer '.$token])->postJson('/user/deposit/1',$data);
+        $response->dump();
+        $response->assertStatus(Response::HTTP_CREATED);
+        $data = $response->decodeResponseJson();
+        $id = $data['deposit']['id'];
+        $this->assertDatabaseHas('deposits',[
+            'id'   =>  $id,
+            'is_on_booking'=>1,
+        ]);
+        $data = [
+            'service_date'=>'2022-10-22',
+            'service_id' => 1
+        ];
+        
+        $token = $user->createToken('test device')->plainTextToken;
+        $response1 = $this->withHeaders(['Accept'=>'application/json','Authorization'=>'Bearer '.$token])->postJson('/user/book/'.$id,$data);
+        $response1->dump();
+        $response1->assertStatus(Response::HTTP_CREATED);
+
+        $data = $response1->decodeResponseJson();
+
+        $this->assertDatabaseHas('bookings',
+        [
+            'id'=>$data['id'],
+            'status'=>1,
+            'deposit_id'=>$id
+        ]
+        );
+
+
+
     }
 
     public function test_booking_with_valid_data()
@@ -105,7 +156,7 @@ class BookingTest extends TestCase
         $token = $user->createToken('test device')->plainTextToken;
         $response = $this->withHeaders(['Accept'=>'application/json','Authorization'=>'Bearer '.$token])->get('/user/check_booking_eligibility/1');
         $response->dump();
-        $response->assertJson(['status'=>true]);
+        $response->assertJson(['status'=>false]);
         $response->assertStatus(Response::HTTP_OK);
     }
     

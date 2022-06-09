@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Auth;
 
 class BookingController extends Controller
 {
-     public function booking(BookingRequest $bookingRequest)
+     public function booking(BookingRequest $bookingRequest,$deposit_id=null)
      {
          $input = $bookingRequest->only('service_date','service_id');
          $user = Auth::guard('user')->user();
@@ -24,7 +24,10 @@ class BookingController extends Controller
          $balance = $generalService->userBalance($user);
          $service = Service::findOrFail($input['service_id']);
          if($service->price > $balance){
-             return response()->json(['status'=>'failed','message'=>'insufficient balance'],Response::HTTP_ACCEPTED);
+             $input['draft'] = true;
+         }
+         if($deposit_id != null){
+             $input['deposit_id'] = $deposit_id;
          }
          $service_date                    =   Carbon::parse($input['service_date']);
          $input['service_provider_id']    =   $service->service_provider_id;

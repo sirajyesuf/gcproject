@@ -19,7 +19,7 @@ class DepositTest extends TestCase
     {
         $user = User::find(1);
         $token = $user->createToken('test device')->plainTextToken;
-        $response = $this->withHeaders(['Accept'=>'application/json','Authorization'=>'Bearer '.$token])->postJson('/user/deposit');
+        $response = $this->withHeaders(['Accept'=>'application/json','Authorization'=>'Bearer '.$token])->postJson('/user/deposit/0');
         $response->dump();
         $response->assertStatus(422);
     }
@@ -33,7 +33,7 @@ class DepositTest extends TestCase
         ];
         $user = User::find(1);
         $token = $user->createToken('test device')->plainTextToken;
-        $response = $this->withHeaders(['Accept'=>'application/json','Authorization'=>'Bearer '.$token])->postJson('/user/deposit',$data);
+        $response = $this->withHeaders(['Accept'=>'application/json','Authorization'=>'Bearer '.$token])->postJson('/user/deposit/0',$data);
         $response->dump();
         $response->assertStatus(Response::HTTP_CREATED);
     }
@@ -42,7 +42,7 @@ class DepositTest extends TestCase
     {
         // $user = User::find(1);
         $token = 'jkdfksljlskdjfklsjdklfj';
-        $response = $this->withHeaders(['Accept'=>'application/json','Authorization'=>'Bearer '.$token])->postJson('/user/deposit');
+        $response = $this->withHeaders(['Accept'=>'application/json','Authorization'=>'Bearer '.$token])->postJson('/user/deposit/0');
         $response->dump();
         $response->assertStatus(401);
     }

@@ -26,11 +26,11 @@ Route::controller(ServiceController::class)->middleware('auth:user')->group(func
   Route::get('/services/{service_provider_id}','listOfServices');
 });
 Route::controller(PaymentController::class)->middleware('auth:user')->group(function(){
- Route::post('/deposit','deposit');
+ Route::post('/deposit/{is_on_booking}','deposit');
 });
 
 Route::controller(BookingController::class)->middleware('auth:user')->group(function(){
-  Route::post('/book','booking');
+  Route::post('/book/{deposit_id?}','booking');
   Route::get('check_booking_eligibility/{service_id}','checkBookingEligibility');
 
  });
