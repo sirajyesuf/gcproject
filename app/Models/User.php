@@ -19,10 +19,7 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
-    protected $fillable = [
-        'name',
-        'phone_number',
-    ];
+   protected $guarded = [];
 
     /**
      * The attributes that should be hidden for serialization.
@@ -61,7 +58,7 @@ class User extends Authenticatable
     public function getProfilePictureAttribute($value)
     {
         if(empty($value)){
-            return url('user_images/profile_picture.png');
+            return url('/user_images/profile_picture.png');
         }
         return url($value);
     }
