@@ -18,12 +18,12 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
-        // User::factory(10)->create();
-        // ServiceProvider::factory(10)->create();
-        // Service::factory(20)->create();
-        // Deposit::factory(10)->create();
-        //  $this->call(DepositSeeder::class);
+        User::factory(10)->create();
+        User::factory(10)->create();
+        ServiceProvider::factory(10)->create();
+        Service::factory(20)->create();
+        Deposit::factory(10)->create();
+        $this->call(DepositSeeder::class);
         $this->call(BookingSeeder::class);
     }
 }

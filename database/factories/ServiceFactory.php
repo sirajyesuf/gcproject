@@ -25,7 +25,7 @@ class ServiceFactory extends Factory
             'name' => $this->faker->name,
             'description' => $this->faker->text,
             'price' => $this->faker->randomFloat(),
-            'type' => $this->faker->randomNumber(),
+            'type' => $this->faker->randomElement([1,2]),
             'image' => $this->faker->word,
             'service_provider_id' => \App\Models\ServiceProvider::factory(),
         ];

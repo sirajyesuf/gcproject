@@ -22,7 +22,6 @@ return new class extends Migration
             $table->string('image');
             $table->unsignedBigInteger('service_provider_id');
             $table->timestamps();
-
             $table->foreign('service_provider_id')->on('service_providers')->references('id');
         });
     }
