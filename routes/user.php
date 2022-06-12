@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\ServiceApprovalController;
+use App\Http\Controllers\ServiceProvider\FeaturedController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\User\AuthenticationController;
@@ -46,4 +48,12 @@ Route::controller(BookingController::class)->middleware('auth:user')->group(func
     Route::get('/profile','profile');
     Route::get('log_out','logOut');
     Route::post('/edit_profile','editProfile');
+  });
+
+  Route::controller(FeaturedController::class)->middleware('auth:user')->group(function(){
+    Route::get('/featureds','featureds');
+  });
+
+  Route::controller(ServiceApprovalController::class)->middleware('auth:user')->group(function(){
+    Route::get('get_approval_token/{booking_id}','generateBarcodeForUser');
   });

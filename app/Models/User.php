@@ -20,10 +20,7 @@ class User extends Authenticatable implements FilamentUser
      *
      * @var array<int, string>
      */
-    protected $fillable = [
-        'name',
-        'phone_number',
-    ];
+   protected $guarded = [];
 
     public function canAccessFilament(): bool
     {
@@ -68,7 +65,7 @@ class User extends Authenticatable implements FilamentUser
     public function getProfilePictureAttribute($value)
     {
         if(empty($value)){
-            return url('user_images/profile_picture.png');
+            return url('/user_images/profile_picture.png');
         }
         return url($value);
     }

@@ -1,4 +1,6 @@
 <?php
+
+use App\Http\Controllers\ServiceApprovalController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ServiceProvider\AuthenticationController;
@@ -66,4 +68,8 @@ Route::controller(ServiceProviderProfileController::class)->middleware('auth:ser
 
   Route::controller(ReportController::class)->middleware('auth:service_provider')->group(function(){
      Route::get('/earnings','earnings');       
+  });
+
+  Route::controller(ServiceApprovalController::class)->middleware('auth:service_provider')->group(function(){
+    Route::post('approve_service/{booking_id}','approveService');
   });
