@@ -23,16 +23,23 @@ class ServiceProviderResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('business_name')->label('Business Name'),
-                Forms\Components\TextInput::make('phone_number')->label('Phone Number')->tel(),
-                Forms\Components\TextInput::make('owner_name')->label('Owner Name'),
-                Forms\Components\FileUpload::make('logo')->label('Logo'),
-                Forms\Components\TextInput::make('latitude')->label('Latitude'),
-                Forms\Components\TextInput::make('longitude')->label('Longitude'),
+                Forms\Components\TextInput::make('business_name')->label('Business Name')
+                ->required(),
+                Forms\Components\TextInput::make('phone_number')->label('Phone Number')->tel()
+                ->required(),
+                Forms\Components\TextInput::make('owner_name')->label('Owner Name')
+                ->required(),
+                Forms\Components\FileUpload::make('logo')->label('Logo')
+                ->required(),
+                Forms\Components\TextInput::make('latitude')->label('Latitude')
+                ->required(),
+                Forms\Components\TextInput::make('longitude')->label('Longitude')
+                ->required(),
                 Forms\Components\Select::make('type')->options([
                     1 => 'Male',
                     2 => 'Female'
-                ]),
+                ])
+                ->required(),
 
 
 

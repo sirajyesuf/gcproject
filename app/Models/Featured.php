@@ -18,4 +18,6 @@ class Featured extends Model
 
     }
 
+    
+
 }
