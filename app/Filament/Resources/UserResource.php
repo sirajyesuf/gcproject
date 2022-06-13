@@ -11,12 +11,13 @@ use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
 use App\Filament\Resources\UserResource\RelationManagers\BookingsRelationManager as BookingsRelationManager;
+use App\Filament\Resources\UserResource\RelationManagers\DepositsRelationManager as DepositsRelationManager;
 
 class UserResource extends Resource
 {
     protected static ?string $model = User::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-collection';
+    protected static ?string $navigationIcon = 'heroicon-o-user-group';
 
     public static function form(Form $form): Form
     {
@@ -47,7 +48,8 @@ class UserResource extends Resource
     public static function getRelations(): array
     {
         return [
-            BookingsRelationManager::class
+            BookingsRelationManager::class,
+            DepositsRelationManager::class
         ];
     }
 

@@ -15,7 +15,7 @@ class FeaturedResource extends Resource
 {
     protected static ?string $model = Featured::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-collection';
+    protected static ?string $navigationIcon = 'heroicon-s-star';
 
     public static function form(Form $form): Form
     {

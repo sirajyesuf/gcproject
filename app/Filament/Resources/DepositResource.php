@@ -10,12 +10,13 @@ use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
+use Filament\Tables\Actions\Action;
 
 class DepositResource extends Resource
 {
     protected static ?string $model = Deposit::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-collection';
+    protected static ?string $navigationIcon = 'heroicon-o-currency-dollar';
 
     public static function form(Form $form): Form
     {
@@ -44,27 +45,15 @@ class DepositResource extends Resource
         return $table
             ->columns([
 
-                Tables\Columns\BadgeColumn::make('payment_method')
-                    ->enum([
-                        1 => "Commercial Bank Of Ethiopia",
-                        2 => "Bank of Absiniya",
-                        3 => "Dashen Bank",
-                        4 => "Hibret Bank"
-                    ])
-                    ->colors([
-                        "primary"
-                    ])
-                    ->label('Payment Method'),
-                Tables\Columns\TextColumn::make('amount')->label('Price (ETB)'),
-                Tables\Columns\TextColumn::make('transaction_number')->label('Transaction Number'),
-                Tables\Columns\BadgeColumn::make('status')
-                ->enum([
-                    1=>"Approved",
-                    2=>"Denied"
-                ])
+                //
             ])
             ->filters([
                 //
+            ])
+            ->actions([
+
+                //
+
             ]);
     }
 
@@ -83,4 +72,6 @@ class DepositResource extends Resource
             'edit' => Pages\EditDeposit::route('/{record}/edit'),
         ];
     }
+
+   
 }
