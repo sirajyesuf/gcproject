@@ -10,7 +10,7 @@ class FeaturedController extends Controller
 {
     public function featureds()
     {
-        $featured = Featured::where('status',true)->get();
+        $featured = Featured::with(['service_provider:id,logo'])->where('status',true)->get();
         return response()->json($featured,200);
     }
 }
