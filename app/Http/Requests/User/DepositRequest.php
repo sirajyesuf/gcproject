@@ -27,7 +27,7 @@ class DepositRequest extends FormRequest
     public function rules()
     {
         return [
-            'payment_method'  =>  ['required',Rule::in([1,2,3])],
+            'payment_method'  =>  ['required',Rule::in([1,2,3,4])],
             'amount'          =>  ['required','integer','gt:0'],
             'transaction_number' => ['required']
         ];

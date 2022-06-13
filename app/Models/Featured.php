@@ -12,12 +12,18 @@ class Featured extends Model
 
     protected $guarded = [];
 
-    public function service_provider(){
+    public function service_provider()
+    {
 
         return $this->belongsTo(ServiceProvider::class);
 
     }
 
-    
+    public function getImagePathAttribute($value)
+    {
+       if(!request()->is('admin')){
+        return url('/storage/'.$value);
+       }
+    }
 
 }
