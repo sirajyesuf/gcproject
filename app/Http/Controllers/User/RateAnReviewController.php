@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\User\AddAndReviewRequest;
 use App\Http\Resources\RateAndReviewResource;
+use App\Models\Booking;
 use App\Models\User\RateAndReview;
 use App\Services\GeneralServices;
 
@@ -44,5 +45,15 @@ class RateAnReviewController extends Controller
       $reviews = RateAndReview::with('user')->where('service_provider_id',$service_provider_id)->paginate(10);
       $resourses =  (new RateAndReviewResource($reviews));
       return response()->json($resourses->response()->getData(),Response::HTTP_OK);
+    }
+
+    public function checkReviewEligibility($service_provider_id)
+    {
+      $user = Auth::guard('user')->user();
+      $exists = Booking::where('service_provider_id',$service_provider_id)
+                        ->where('user_id',$user->id)->where('status',2)->exists();
+      return response()->json(['status'=>$exists],200);                  
+
+
     }
 }

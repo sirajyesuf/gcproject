@@ -42,6 +42,7 @@ Route::controller(BookingController::class)->middleware('auth:user')->group(func
    Route::post('/add_review','add');
    Route::post('/edit_review/{id}','edit');
    Route::get('service_provider_reviews/{service_provider_id}','serviceProviderReviews');
+   Route::get('/check_review_eligibility/{service_provider_id}','checkReviewEligibility');
  });
 
  Route::controller(UserProfileController::class)->middleware('auth:user')->group(function(){

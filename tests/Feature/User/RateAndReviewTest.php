@@ -152,4 +152,13 @@ class RateAndReviewTest extends TestCase
         $response->assertStatus(Response::HTTP_OK);
 
     }
+
+    public function test_check_review_eligibility_one()
+    {
+        $user = User::find(17);
+        $token = $user->createToken('test device')->plainTextToken;
+        $response = $this->withHeaders(['Accept'=>'application/json','Authorization'=>'Bearer '.$token])->get('user/check_review_eligibility/1');
+        $response->dump();
+        $response->assertStatus(Response::HTTP_OK);
+    }
 }
