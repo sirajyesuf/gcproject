@@ -15,6 +15,7 @@ class ContextAwareService
         $bookings = Booking::where('user_id',$user->id)->get();
         $initial_date = null;
         $intervals = [];
+        \Log::info("user ".$user->name." is running");
         foreach($bookings as $booking){
             if($initial_date == null){
               $initial_date = Carbon::parse($booking->service_date);
