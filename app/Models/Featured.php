@@ -22,7 +22,7 @@ class Featured extends Model
     public function getImagePathAttribute($value)
     {
        if(!request()->is('admin')){
-        return url('/'.$value);
+        return url('/storage/'.$value);
        }
     }
 
