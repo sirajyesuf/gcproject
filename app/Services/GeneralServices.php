@@ -5,6 +5,7 @@ namespace App\Services;
 use Carbon\Carbon;
 use App\Models\Service;
 use App\Models\User\RateAndReview;
+use App\Models\Withdraw;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -77,7 +78,8 @@ class GeneralServices
    {
       $earning  = $this->serviceProviderTotalEarning($serviceProvider);
       $service_fee = $this->serviceProviderTotalFee($serviceProvider);
-      $balance = $earning-$service_fee; 
+      $withdraw   = Withdraw::where('service_provider_id',$serviceProvider->id)->where('status',3)->sum('amount');
+      $balance = $earning-$service_fee-$withdraw; 
       return $balance;
    }
 
