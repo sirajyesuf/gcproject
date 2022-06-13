@@ -2,11 +2,12 @@
 
 namespace App\Services;
 
+use Carbon\Carbon;
 use App\Models\Service;
 use App\Models\User\RateAndReview;
-use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class GeneralServices
 {
@@ -34,7 +35,7 @@ class GeneralServices
    public function userDeposit($user)
    {
       if($user->deposits){
-          return $user->deposits()->where('status',true)->sum('amount');
+          return $user->deposits()->where('status',2)->sum('amount');
       }
       return 0;
    }
@@ -99,6 +100,21 @@ class GeneralServices
    public function totalWithdraw($serviceProvider)
    {
      return $serviceProvider->withdraws()->where('status',3)->sum('amount');
+   }
+
+   public function sendSms($phone_number,$message)
+   {
+       $url = 'https://sms.hahucloud.com/api/send';
+       $parametres = [
+           'key'     => '9eb2f7e2bfe6b1e496578f32c0b1e311d58b67c1',
+           'phone'   => $phone_number,
+           'message' => $message,
+       ];
+       $send_sms = Http::get($url,$parametres);
+       if($send_sms->status() == 200){
+           return true;
+       }
+       return false;
    }
 
 }
