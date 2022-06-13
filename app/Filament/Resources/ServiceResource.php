@@ -21,7 +21,15 @@ class ServiceResource extends Resource
     {
         return $form
             ->schema([
-                //
+                Forms\Components\TextInput::make('name'),
+                Forms\Components\TextInput::make('description'),
+                Forms\Components\TextInput::make('price')->numeric(),
+                Forms\Components\Select::make('type')
+                    ->options([
+                        1 => 'Male',
+                        2 => 'Female',
+                    ]),
+                Forms\Components\FileUpload::make('image')
             ]);
     }
 
@@ -35,14 +43,14 @@ class ServiceResource extends Resource
                 //
             ]);
     }
-    
+
     public static function getRelations(): array
     {
         return [
             //
         ];
     }
-    
+
     public static function getPages(): array
     {
         return [

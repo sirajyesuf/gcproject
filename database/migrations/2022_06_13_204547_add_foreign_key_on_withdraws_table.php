@@ -13,10 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->string('email')->unique()->nullable();
-            $table->string("phone_number")->nullable()->change();
-            $table->string("password")->nullable();
+        Schema::table('withdraws', function (Blueprint $table) {
+            $table->foreign('service_provider_id')->on('service_providers')->references('id');
         });
     }
 
@@ -27,7 +25,7 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('users', function (Blueprint $table) {
+        Schema::table('withdraws', function (Blueprint $table) {
             //
         });
     }

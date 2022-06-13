@@ -22,7 +22,8 @@ class BookingsRelationManager extends HasManyRelationManager
     {
         return $form
             ->schema([
-                //
+            Forms\Components\BelongsToSelect::make('Service Provider')
+            ->relationship('serviceProvider','business_name')
             ]);
     }
 

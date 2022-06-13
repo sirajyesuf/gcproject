@@ -8,4 +8,6 @@ use Filament\Resources\Pages\CreateRecord;
 class CreateWithdraw extends CreateRecord
 {
     protected static string $resource = WithdrawResource::class;
+
+    
 }
