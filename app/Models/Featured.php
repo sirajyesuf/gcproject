@@ -12,4 +12,10 @@ class Featured extends Model
 
     protected $guarded = [];
 
+    public function service_provider(){
+
+        return $this->belongsTo(ServiceProvider::class);
+
+    }
+
 }

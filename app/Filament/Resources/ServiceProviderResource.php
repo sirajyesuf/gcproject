@@ -22,7 +22,24 @@ class ServiceProviderResource extends Resource
     public static function form(Form $form): Form
     {
         return $form
-            ->schema([]);
+            ->schema([
+                Forms\Components\TextInput::make('business_name')->label('Business Name'),
+                Forms\Components\TextInput::make('phone_number')->label('Phone Number')->tel(),
+                Forms\Components\TextInput::make('owner_name')->label('Owner Name'),
+                Forms\Components\FileUpload::make('logo')->label('Logo'),
+                Forms\Components\TextInput::make('latitude')->label('Latitude'),
+                Forms\Components\TextInput::make('longitude')->label('Longitude'),
+                Forms\Components\Select::make('type')->options([
+                    1 => 'Male',
+                    2 => 'Female'
+                ]),
+
+
+
+
+
+
+            ]);
     }
 
     public static function table(Table $table): Table
@@ -47,9 +64,10 @@ class ServiceProviderResource extends Resource
     {
         return [
             'index' => Pages\ListServiceProviders::route('/'),
+            'create' => Pages\CreateServiceProvider::route('/create'),
+            'edit' => Pages\EditServiceProvider::route('/{record}/edit'),
             'view' => Pages\ViewServiceProvider::route('/{record}'),
-            // 'create' => Pages\CreateServiceProvider::route('/create'),
-            // 'edit' => Pages\EditServiceProvider::route('/{record}/edit'),
+
         ];
     }
 }

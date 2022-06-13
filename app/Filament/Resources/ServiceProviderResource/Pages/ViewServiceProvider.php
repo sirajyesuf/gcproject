@@ -8,7 +8,7 @@ use Filament\Resources\Pages\ViewRecord;
 class ViewServiceProvider extends ViewRecord
 {
     protected static string $resource = ServiceProviderResource::class;
-    protected static ?string $title = 'services';
+    protected static ?string $title = 'Service Provider Detail';
 
 
 }

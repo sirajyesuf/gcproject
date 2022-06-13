@@ -68,4 +68,8 @@ class ServiceProvider extends Authenticatable
     {
         return $this->hasMany(Withdraw::class);
     }
+    public function featured()
+    {
+        return $this->hasOne(Featured::class);
+    }
 }
