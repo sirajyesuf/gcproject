@@ -12,10 +12,16 @@ class Featured extends Model
 
     protected $guarded = [];
 
-    public function service_provider(){
+    public function service_provider()
+    {
 
         return $this->belongsTo(ServiceProvider::class);
 
+    }
+
+    public function getImagePathAttribute($value)
+    {
+       return url('/'.$value);
     }
 
 }
