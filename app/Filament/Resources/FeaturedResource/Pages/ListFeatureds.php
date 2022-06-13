@@ -29,6 +29,4 @@ class ListFeatureds extends ListRecords
                 ])
         ];
     }
-
-    
 }
