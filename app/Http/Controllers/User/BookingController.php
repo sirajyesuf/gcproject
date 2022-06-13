@@ -49,7 +49,7 @@ class BookingController extends Controller
      public function userBookings()
      {
         $user = Auth::guard('user')->user();
-        $bookings = Booking::with(['user','service'])->where('user_id',$user->id)->paginate(15);
+        $bookings = Booking::with(['user','service'])->where('user_id',$user->id)->orderBy('created_at','DESC')->paginate(15);
         $resourse = (new BookingResourceCollection($bookings));
         return response()->json($resourse->response()->getData(),Response::HTTP_OK);
      }
