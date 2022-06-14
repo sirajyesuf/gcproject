@@ -3,7 +3,8 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-
+use Filament\Facades\Filament;
+ 
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -13,7 +14,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        Filament::registerPages([
+            \RyanChandler\FilamentProfile\Pages\Profile::class
+        ]);
     }
 
     /**

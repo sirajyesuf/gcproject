@@ -51,7 +51,7 @@ class ListDeposits extends ListRecords
                 ->enum([
                     1 => "Pending",
                     2 => "Approved",
-                    3 => "Regected"
+                    3 => "Rejected"
                 ])
                 ->colors([
                     'warning' => fn ($state) => $state == 1,
@@ -74,7 +74,7 @@ class ListDeposits extends ListRecords
 
             Action::make('deny')
                 ->action('rejecte')
-                ->label('Regecte')
+                ->label('Rejecte')
                 ->color('danger')
                 ->icon('heroicon-o-check')
                 ->requiresConfirmation()

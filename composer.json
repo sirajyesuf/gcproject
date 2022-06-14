@@ -12,7 +12,8 @@
         "kmlaravel/laravel-geographical-calculator": "^2.2",
         "laravel/framework": "^9.2",
         "laravel/sanctum": "^2.14.1",
-        "laravel/tinker": "^2.7"
+        "laravel/tinker": "^2.7",
+        "ryangjchandler/filament-profile": "^0.2.0"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",

@@ -17,10 +17,8 @@ class CreateFeatured extends CreateRecord
         return [
             Forms\Components\TextInput::make('title')->label('Title'),
             Forms\Components\Textarea::make('description')->label('Description'),
-            Forms\Components\FileUpload::make('image_path')->label('Photo')
-                ->getUploadedFileNameForStorageUsing(function (TemporaryUploadedFile $file): string {
-                    return (string) str($file->getClientOriginalName())->prepend('storage/');
-                }),
+            Forms\Components\FileUpload::make('image_path')->label('Photo')->image()
+            ->required(),
             Forms\Components\BelongsToSelect::make('service_provider_id')
                 ->relationship('service_provider', 'name'),
 
