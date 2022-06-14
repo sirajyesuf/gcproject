@@ -27,7 +27,7 @@ class ContextAwareService
                 $initial_date = $final_date;
             }
         }
-        \Log::info("intervals".print_r($intervals));
+        \Log::info("intervals".print_r($intervals,true));
 
         if(!empty($intervals) && count($intervals) > 1){
           $initial = null;  
