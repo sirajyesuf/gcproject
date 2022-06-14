@@ -38,7 +38,7 @@ class BookingSeeder extends Seeder
             $eight_date
         ];
       foreach($dates as $date){
-        Booking::factory()->count(8)->create(['service_date'=>$date]);
+        Booking::factory()->count(1)->create(['service_date'=>$date]);
       }
     }
 }
