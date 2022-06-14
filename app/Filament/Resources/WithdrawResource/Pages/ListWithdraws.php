@@ -16,6 +16,7 @@ class ListWithdraws extends ListRecords
     {
         return [
             Tables\Columns\TextColumn::make('amount')->label('Amount (ETB)'),
+            // Tables\Columns\TextColumn::make('withdraw'),
             Tables\Columns\BadgeColumn::make('status')
                 ->colors([
                     'primary' => fn ($state): bool => $state == 1,

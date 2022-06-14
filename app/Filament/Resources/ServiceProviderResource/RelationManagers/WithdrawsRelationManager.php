@@ -18,8 +18,20 @@ class WithdrawsRelationManager extends HasManyRelationManager
     {
         return $form
             ->schema([
-                //
+
+                Forms\Components\TextInput::make('amount')
+                    ->label('Amount')
+                    ->required()
+                    ->numeric()
             ]);
+    }
+
+    protected function mutateFormDataBeforeCreate(array $data): array
+    {
+        $data['status'] = 1;
+
+        return $data;
+
     }
 
     public static function table(Table $table): Table

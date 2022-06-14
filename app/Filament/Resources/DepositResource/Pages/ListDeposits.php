@@ -9,12 +9,17 @@ use Filament\Tables\Actions\Action;
 use App\Models\Deposit;
 use Filament\Forms;
 use App\Models\Booking;
-
+use Illuminate\Database\Eloquent\Builder;
 use App\Services\GeneralServices;
 
 class ListDeposits extends ListRecords
 {
     protected static string $resource = DepositResource::class;
+
+    protected function getTableQuery(): Builder
+    {
+        return  Deposit::query()->orderBy('created_at', 'DESC');
+    } 
 
     protected function getTableColumns(): array
     {
@@ -46,7 +51,7 @@ class ListDeposits extends ListRecords
                 ->enum([
                     1 => "Pending",
                     2 => "Approved",
-                    3 => "Regected"
+                    3 => "Rejected"
                 ])
                 ->colors([
                     'warning' => fn ($state) => $state == 1,
@@ -69,7 +74,7 @@ class ListDeposits extends ListRecords
 
             Action::make('deny')
                 ->action('rejecte')
-                ->label('Regecte')
+                ->label('Rejecte')
                 ->color('danger')
                 ->icon('heroicon-o-check')
                 ->requiresConfirmation()

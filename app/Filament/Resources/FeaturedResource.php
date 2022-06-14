@@ -22,11 +22,15 @@ class FeaturedResource extends Resource
         return $form
             ->schema([
 
-                Forms\Components\TextInput::make('title')->label('Title'),
-                Forms\Components\Textarea::make('description')->label('Description'),
-                Forms\Components\FileUpload::make('image_path')->label('Photo'),
+                Forms\Components\TextInput::make('title')->label('Title')
+                    ->required(),
+                Forms\Components\TextInput::make('description')->label('Description')
+                    ->required(),
+                Forms\Components\FileUpload::make('image_path')->label('Photo')
+                    ->required(),
                 Forms\Components\BelongsToSelect::make('service_provider_id')
-                    ->relationship('service_provider', 'business_name'),
+                    ->relationship('service_provider', 'business_name')
+                    ->required(),
                 Forms\Components\Toggle::make('status')->inline()->label('Enabled')
 
             ]);

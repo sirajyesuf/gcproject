@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedDouble('amount');
             $table->unsignedBigInteger('service_provider_id');
-            $table->unsignedInteger('status');//1 for pending,2 for rejected , 3 for paid
+            $table->unsignedInteger('status'); //1 for pending,2 for rejected , 3 for paid
             $table->timestamps();
         });
     }
