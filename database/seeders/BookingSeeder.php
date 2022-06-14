@@ -27,16 +27,17 @@ class BookingSeeder extends Seeder
         $seventh_date  =   $sixth_date->copy()->addWeek();
         $eight_date    =   $seventh_date->copy()->addWeek();
 
-
-        Booking::factory(8)->state(new Sequence(
-            ['service_date'=>$first_date],
-            ['service_date'=>$second_date],
-            ['service_date'=>$third_date],
-            ['service_date'=>$fourth_date],
-            ['service_date'=>$fifth_date],
-            ['service_date'=>$sixth_date],
-            ['service_date'=>$seventh_date],
-            ['service_date'=>$eight_date]
-        ))->create();
+        $date =  [
+            $first_date,
+            $second_date,
+            $third_date,
+            $fourth_date,
+            $fifth_date,
+            $sixth_date,
+            $seventh_date,
+            $eight_date
+        ];
+        Booking::factory()->count(8)->sequence(fn ($sequence) => ['service_date' => $date[$sequence->index]])
+        ->create();
     }
 }
