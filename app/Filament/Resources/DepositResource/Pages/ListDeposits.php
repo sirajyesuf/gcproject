@@ -9,12 +9,17 @@ use Filament\Tables\Actions\Action;
 use App\Models\Deposit;
 use Filament\Forms;
 use App\Models\Booking;
-
+use Illuminate\Database\Eloquent\Builder;
 use App\Services\GeneralServices;
 
 class ListDeposits extends ListRecords
 {
     protected static string $resource = DepositResource::class;
+
+    protected function getTableQuery(): Builder
+    {
+        return  Deposit::query()->orderBy('created_at', 'DESC');
+    } 
 
     protected function getTableColumns(): array
     {
