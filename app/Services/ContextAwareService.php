@@ -10,7 +10,6 @@ class ContextAwareService
 {
   public function __invoke()
   {
-    return;
     $users = User::all();
     foreach($users as $user){
         $bookings = Booking::where('user_id',$user->id)->get();
@@ -28,7 +27,8 @@ class ContextAwareService
                 $initial_date = $final_date;
             }
         }
-        
+        \Log::info("intervals".print_r($intervals));
+
         if(!empty($intervals) && count($intervals) > 1){
           $initial = null;  
           $recommend = 0;
@@ -48,6 +48,7 @@ class ContextAwareService
              }
 
           }
+          return;
 
           if($recommend > $no_recommend){
             $average_day = $sum/$recommend;
