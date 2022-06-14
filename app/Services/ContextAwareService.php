@@ -48,7 +48,7 @@ class ContextAwareService
              }
 
           }
-continue;
+          continue;
           if($recommend > $no_recommend){
             $average_day = $sum/$recommend;
             $next = $final_date->addDays($average_day);
@@ -58,6 +58,7 @@ continue;
             $service = new GeneralServices();
             $service->sendSms($user->phone_number,$message);
           }
+          
         }
     }
   }
