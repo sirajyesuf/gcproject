@@ -1,1 +1,1 @@
-<h5>MRX</h5>
+<h5>Salon and Spa Booking</h5>
